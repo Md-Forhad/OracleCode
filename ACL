@@ -1,0 +1,85 @@
+
+select *
+from dba_network_acls
+
+select *
+FROM dba_network_acl_privileges
+order by aclid asc
+
+grant dba to ssltest identified by ssltest;
+
+GRANT EXECUTE ON UTL_TCP TO ssltest;
+GRANT EXECUTE ON UTL_HTTP TO ssltest;
+	
+		BEGIN
+		
+		DBMS_NETWORK_ACL_ADMIN.create_acl (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		description => 'A test of the ACL SSLTEST function',
+		principal => 'SSLTEST', --- this is the user who will use this
+		is_grant => TRUE,
+		privilege => 'connect',
+		start_date => null, ---SYSTIMESTAMP,
+		end_date => NULL);
+
+		COMMIT;
+		END;
+
+
+		BEGIN
+            DBMS_NETWORK_ACL_ADMIN.assign_acl(
+            acl => 'acl_for_SSLTESTIDRA.xml',
+            host => 'sandbox.sslcommerz.com',
+            lower_port => 80,
+            upper_port => 9999);
+		END;
+		
+		BEGIN
+		DBMS_NETWORK_ACL_ADMIN.assign_acl (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		host => '*.sslcommerz.com',
+		lower_port => 80,
+		upper_port => 9999);
+		END;
+
+		begin
+		dbms_network_acl_admin.assign_acl (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		host => 'erp.trustislamilife.com',
+		lower_port => 80,
+		upper_port => 9999);
+		end;
+		
+		begin
+		dbms_network_acl_admin.assign_acl (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		host => '58.147.171.11',---it is pc name where database is installed 5.161.192.226
+		lower_port => 80,
+		upper_port => 9999);
+		end; 
+		
+		begin
+		dbms_network_acl_admin.assign_acl (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		host => 'orcl.trustlife.com',---it is pc name where database is installed 5.161.192.226
+		lower_port => 80,
+		upper_port => 9999);
+		end;
+		
+		begin
+		dbms_network_acl_admin.assign_acl (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		host => 'erp.elitebd.com',---it is pc name where database is installed 5.161.192.226
+		lower_port => 80,
+		upper_port => 9999);
+		end;
+
+		begin
+		DBMS_NETWORK_ACL_ADMIN.add_privilege (
+		acl => 'acl_for_SSLTESTIDRA.xml',
+		principal => 'SSLTEST',
+		is_grant => TRUE,
+		privilege => 'connect');
+		end;
+		/    
+		
