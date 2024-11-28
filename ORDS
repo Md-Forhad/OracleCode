@@ -31,3 +31,23 @@ One symptom that this parameter is needed is that APEX works OK, but the redirec
 
 Note that it is only appropriate to use this setting in development or test environments. 
 It is never appropriate to use this setting in production environments because it will result in user credentials being passed in clear text.
+
+## ORDS configuration-3 ##
+----------------------------------------------------
+Trusted Origin Configuration
+-------------------------------
+After enabling SSL and reverse proxy, it's common to encounter issues when logging into Oracle APEX workspace due to untrusted origins. 
+To overcome this, we need to configure trusted origins in the ORDS configuration file. Here's how:
+
+1. Open the ORDS configuration folder and locate the 'settings.xml' file.
+2. Add an entry for your domain to the 'settings.xml' file to designate it as a trusted origin.
+
+ <entry key="security.externalSessionTrustedOrigins">http://example.com,https://example.com:443</entry>
+ <entry key="security.forceHTTPS">true</entry>
+
+3. Save the changes and restart the server to apply the configuration.
+
+By following the steps outlined in this tutorial and configuring trusted origins, 
+we can establish a secure foundation for testing and integrating advanced functionalities into our Oracle APEX applications. 
+Stay tuned for more insightful tutorials in our "How-to in Oracle APEX" series!
+
