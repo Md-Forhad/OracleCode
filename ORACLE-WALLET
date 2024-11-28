@@ -2,6 +2,8 @@ Reference
 -----------------------
 # https://www.youtube.com/watch?v=nXksRHE0uO0&t=181s
 # https://danielwestermann.com/2015/02/09/ouch-orapki-wallet-remove-throws-improperly-specified-input-name-in-12c/
+# https://oracle-base.com/articles/23/transport-layer-security-tls-connections-without-a-client-wallet-23
+# https://oracle-base.com/articles/misc/utl_http-and-ssl
 
 # Create Wallet
 orapki wallet create -wallet wallet_path -pwd wallet_apssword -auto_login
