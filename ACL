@@ -94,4 +94,17 @@ GRANT EXECUTE ON UTL_HTTP TO ssltest;
 		privilege => 'connect');
 		end;
 		/    
-		
+
+
+Remove the created permission or ACL rule from the Oracle Database.
+
+
+--Un-assign network from ACL:
+exec DBMS_NETWORK_ACL_ADMIN.UNASSIGN_ACL(acl =>'hr_utl_mail.xml',lower_port =>'*',upper_port =>25);
+
+-- Remove privilege from an user:
+exec DBMS_NETWORK_ACL_ADMIN.DELETE_PRIVILEGE(acl =>'hr_utl_mail.xml',principal =>'PUBLIC',is_grant =>TRUE,privilege =>'connect');
+exec DBMS_NETWORK_ACL_ADMIN.DELETE_PRIVILEGE(acl =>'hr_utl_mail.xml',principal =>'PUBLIC',is_grant =>TRUE,privilege =>'resolve');
+
+-- Drop ACL:
+exec DBMS_NETWORK_ACL_ADMIN.DROP_ACL (acl => 'hr_utl_mail.xml' );
