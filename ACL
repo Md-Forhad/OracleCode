@@ -1,4 +1,7 @@
-
+## REFERENES ##
+---------------------------------
+1. https://oracle-base.com/articles/11g/fine-grained-access-to-network-services-11gr1#google_vignette
+-----------------------------------------------------------------------------------------------------------------------------
 select *
 from dba_network_acls
 
