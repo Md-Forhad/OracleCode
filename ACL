@@ -9,6 +9,12 @@ order by aclid asc
 SELECT host, lower_port, upper_port, privilege, status 
 FROM user_network_acl_privileges;
 
+SELECT *
+FROM   TABLE(DBMS_NETWORK_ACL_UTILITY.domains('oel5-11g.localdomain'));
+
+SELECT DBMS_NETWORK_ACL_UTILITY.domain_level('oel5-11g.localdomain')
+FROM   dual;
+
 grant dba to ssltest identified by ssltest;
 
 GRANT EXECUTE ON UTL_TCP TO ssltest;
