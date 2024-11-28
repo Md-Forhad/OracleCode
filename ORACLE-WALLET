@@ -1,3 +1,7 @@
+Reference
+-----------------------
+# https://www.youtube.com/watch?v=nXksRHE0uO0&t=181s
+
 # Create Wallet
 orapki wallet create -wallet wallet_path -pwd wallet_apssword -auto_login
 
