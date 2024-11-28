@@ -6,6 +6,9 @@ select *
 FROM dba_network_acl_privileges
 order by aclid asc
 
+SELECT host, lower_port, upper_port, privilege, status 
+FROM user_network_acl_privileges;
+
 grant dba to ssltest identified by ssltest;
 
 GRANT EXECUTE ON UTL_TCP TO ssltest;
