@@ -1,7 +1,33 @@
-How to check ORDS version from APEX builder
+#How to check ORDS version from APEX builder
 ----------------------------------------------------
 select owa_util.get_cgi_env('APEX_LISTENER_VERSION') 
 from dual;
 
 select ords.installed_version 
 from dual
+
+## ORDS configuration-1 ##
+----------------------------------------------------
+# add one line to the file global/settings.xml in the ORDS configuration directory:
+<entry key="security.forceHTTPS">true</entry>
+
+One symptom that this parameter is needed is that APEX works OK, but the redirect_uri that APEX sends as a parameter in the request to your OpenID Connect provider contains port 80 in an URI that starts with https://.
+
+## ORDS configuration-2 ##
+----------------------------------------------------
+# Default behavior can be disabled in environments where HTTPS is not available as follows:
+
+1. Locate the folder where the Oracle REST Data Services configuration is stored.
+
+2.Edit the file named defaults.xml.
+
+3.Add the following setting to the end of this file just before the </properties> tag.
+
+ <entry key="security.verifySSL">false</entry>
+
+4.Save the file.
+
+5.Restart Oracle REST Data Services if it is running.
+
+Note that it is only appropriate to use this setting in development or test environments. 
+It is never appropriate to use this setting in production environments because it will result in user credentials being passed in clear text.
