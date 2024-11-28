@@ -34,7 +34,7 @@ It is never appropriate to use this setting in production environments because i
 
 ## ORDS configuration-3 ##
 ----------------------------------------------------
-Trusted Origin Configuration
+Trusted Origin Configuration-1
 -------------------------------
 After enabling SSL and reverse proxy, it's common to encounter issues when logging into Oracle APEX workspace due to untrusted origins. 
 To overcome this, we need to configure trusted origins in the ORDS configuration file. Here's how:
@@ -51,3 +51,29 @@ By following the steps outlined in this tutorial and configuring trusted origins
 we can establish a secure foundation for testing and integrating advanced functionalities into our Oracle APEX applications. 
 Stay tuned for more insightful tutorials in our "How-to in Oracle APEX" series!
 
+Trusted Origin Configuration-2.1
+---------------------------------
+References : https://blog.cloudnueva.com/running-ords-standalone-mode
+------------------------------------------------------------------------
+
+# Allow access from example.com
+ords --config $ORDS_CONFIG config set security.externalSessionTrustedOrigins https://example.com
+# Verify HTTP Header Contains X-Forwarded-Proto: https
+ords --config $ORDS_CONFIG config set security.httpsHeaderCheck "X-Forwarded-Proto: https"
+
+or 
+
+<entry key="security.externalSessionTrustedOrigins">https://example.com</entry>
+<entry key="security.httpsHeaderCheck">X-Forwarded-Proto: https</entry>
+
+Trusted Origin Configuration-2.2
+---------------------------------
+# Allow access from example.com
+ords --config $ORDS_CONFIG config set security.externalSessionTrustedOrigins https://example.com
+# Force HTTPS
+ords --config $ORDS_CONFIG config set security.forceHTTPS true
+
+or 
+
+<entry key="security.externalSessionTrustedOrigins">https://example.com</entry>
+<entry key="security.forceHTTPS">true</entry>
