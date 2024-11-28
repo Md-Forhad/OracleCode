@@ -1,0 +1,7 @@
+How to check ORDS version from APEX builder
+----------------------------------------------------
+select owa_util.get_cgi_env('APEX_LISTENER_VERSION') 
+from dual;
+
+select ords.installed_version 
+from dual
