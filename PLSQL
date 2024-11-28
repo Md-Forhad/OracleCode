@@ -26,3 +26,32 @@ BEGIN
       USING dept_id;
    EXECUTE IMMEDIATE 'ALTER SESSION SET SQL_TRACE TRUE';
 END;
+
+PL-SQL => OUT PARAMETER
+-------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE checkfiled (my_id  IN     emp.id%TYPE,     v_msg     OUT VARCHAR2)
+IS
+   my_name  emp.firstname%TYPE;
+BEGIN
+   SELECT firstname
+     INTO my_name
+     FROM emp
+    WHERE id = my_id;
+
+   INSERT INTO customer
+        VALUES (UID, firstname);
+
+   v_msg := 'FIELD IS NOT EMPTY';
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      v_msg := SQLCODE || '-' || SQLERRM;
+END;
+
+DECLARE
+   msg  VARCHAR2 (4000 CHAR);
+BEGIN
+   checkfiled ('10A', msg);
+   DBMS_OUTPUT.put_line ('Procedure returned ' || msg);
+END;
+/
