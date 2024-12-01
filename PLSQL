@@ -55,3 +55,13 @@ BEGIN
    DBMS_OUTPUT.put_line ('Procedure returned ' || msg);
 END;
 /
+
+PL-SQL => TIME Calculation
+-------------------------------------------------------------------------------
+select osm_id, OSM_END_TIME, OSM_START_TIME,to_char(OSM_END_TIME,'HH24') end_time,to_char(OSM_START_TIME,'HH24') start_time,
+ osm_name, case when  (to_number(to_char(OSM_START_TIME,'HH24')) > 12) then 
+                                   extract( HOUR from ( cast(OSM_END_TIME + INTERVAL '1' DAY AS TIMESTAMP)  - cast( OSM_START_TIME AS TIMESTAMP) ) )
+                   else extract( HOUR from ( cast(OSM_END_TIME AS TIMESTAMP)  - cast(OSM_START_TIME AS TIMESTAMP) ) ) end working_hours
+from OFFICE_SHIFT_MST
+--where osm_id = 12
+order by osm_id asc
