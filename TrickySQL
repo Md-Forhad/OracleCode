@@ -1,1 +1,9 @@
-
+==== SQL to findout charecter and number placement and cutting finding searching charecter and number ====
+select emp_id, emp_name, emp_code, emp_old_system_id, 
+trim( substr(emp_old_system_id, instr(emp_old_system_id,' ',1)  ) ) as cutting_text, 
+REGEXP_INSTR( trim( substr(emp_old_system_id, instr(emp_old_system_id,' ',1)  ) ) , '[A-Za-z]', 1) as first_cha,
+REGEXP_REPLACE( trim( substr(emp_old_system_id, instr(emp_old_system_id,' ',1)  ) ) , '[^A-Za-z]', '') as total_cha,
+EMP_DATA_TYPE, EMP_RECR_CONFIRM_FLAG, EMP_RECRUITMENT_TYPE --nvl( instr(emp_old_system_id,'M',1), 
+from emp_mst
+where emp_type = 2
+order by emp_id desc
