@@ -1,3 +1,12 @@
+#ORDS Default pool password Change
+---------------------------------------------------
+==> for Latest ORDS
+ords --config C:\ords_install\config-ords config --db-pool default secret db.password
+ords --config C:\ords_install\config-superords config --db-pool default secret db.password
+
+==> for ORDS 19
+java -jar ords.war setup
+
 #How to check ORDS version from APEX builder
 ----------------------------------------------------
 select owa_util.get_cgi_env('APEX_LISTENER_VERSION') 
