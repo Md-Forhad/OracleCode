@@ -19,6 +19,6 @@ orapki wallet add -wallet wallet_path -trusted_cert -cert "C:\certificates\ISRG 
 
 /u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet create -wallet /home/oracle/SSL_NEW_WALLET/ -auto_login -pwd oraclewallet@123
 
-/u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet add -wallet /home/oracle/SSL_NEW_WALLET/ -trusted_cert -cert "/home/oracle/certificate_file/wallet_sslcommerz" -pwd oraclewallet@123
+/u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet add -wallet /home/oracle/SSL_NEW_WALLET/ -trusted_cert -cert "/home/oracle/certificate_file/wallet_sslcommerz.crt" -pwd oraclewallet@123
 
 /u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet display -wallet /home/oracle/SSL_NEW_WALLET/
