@@ -12,3 +12,13 @@ orapki wallet create -wallet wallet_path -pwd wallet_apssword -auto_login
 
 //Next, add the trusted certificate to the wallet. Replace "C:\certificates\ISRG Root X1.crt" with the actual location of your certificate: 
 orapki wallet add -wallet wallet_path -trusted_cert -cert "C:\certificates\ISRG Root X1.crt" -pwd OracleWallet19
+
+=== linux ===
+
+/home/oracle/SSL_NEW_WALLET/
+
+/u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet create -wallet /home/oracle/SSL_NEW_WALLET/ -auto_login -pwd oraclewallet@123
+
+/u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet add -wallet /home/oracle/SSL_NEW_WALLET/ -trusted_cert -cert "/home/oracle/certificate_file/wallet_sslcommerz" -pwd oraclewallet@123
+
+/u01/app/oracle/product/19.0.0/dbhome_1/bin/orapki wallet display -wallet /home/oracle/SSL_NEW_WALLET/
