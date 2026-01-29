@@ -1,0 +1,36 @@
+
+
+DECLARE
+  TYPE EmpZoneTyp IS RECORD (
+    zone_id   zone_info.zone_id%TYPE,
+    zone_name   zone_info.zone_name%TYPE
+  );
+    v_emp_rec EmpZoneTyp;
+  -- Function specification
+  FUNCTION get_user_zone_info (p_emp_id IN INTEGER) RETURN EmpZoneTyp IS
+    v_return_rec EmpZoneTyp;
+    
+  BEGIN
+    -- Select data into the record variable
+    select zone_id , zone_name
+    INTO   v_return_rec
+    from zone_info
+    WHERE  zone_id = 1 ;
+
+    -- Return the record variable
+    RETURN v_return_rec;
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+      -- Handle exception if no employee found and return an empty or default record
+      RETURN NULL;
+  END get_user_zone_info;
+
+BEGIN
+  -- Call the function and assign the returned record to a local variable
+  v_emp_rec := get_user_zone_info(101); -- Example employee ID
+
+  -- Access fields in the returned record using dot notation
+  DBMS_OUTPUT.PUT_LINE('Zone ID: ' || v_emp_rec.zone_id || 'Zone Name: ' || v_emp_rec.zone_name);
+
+END;
+/
