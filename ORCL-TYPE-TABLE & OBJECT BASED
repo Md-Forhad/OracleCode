@@ -1,0 +1,29 @@
+-- 1. Create an Object Type (Represents one row/multiple columns)
+CREATE OR REPLACE TYPE emp_row_obj AS OBJECT (
+    emp_id   NUMBER,
+    emp_name VARCHAR2(100),
+    job      VARCHAR2(50)
+);
+/
+
+-- 2. Create a Table Type (Collection of the objects)
+CREATE OR REPLACE TYPE emp_table_type AS TABLE OF emp_row_obj;
+/
+
+-- 3. Create the Pipelined Function
+CREATE OR REPLACE FUNCTION get_dept_employees(p_dept_id IN NUMBER) 
+RETURN emp_table_type PIPELINED 
+IS
+BEGIN
+    -- Loop through records and "pipe" them back to the caller
+    FOR r IN (SELECT employee_id, first_name || ' ' || last_name as full_name, job_id 
+              FROM employees 
+              WHERE department_id = p_dept_id) 
+    LOOP
+        -- Return each row immediately
+        PIPE ROW(emp_row_obj(r.employee_id, r.full_name, r.job_id));
+    END LOOP;
+
+    RETURN; -- Required for pipelined functions
+END;
+/
